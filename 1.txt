@@ -1,0 +1,28 @@
+#s1q1
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('/home/adika/Downloads/Iris.csv')
+df
+
+df['Species'].value_counts().plot.pie()
+plt.title('Frequency of Three Species')
+plt.legend()
+plt.show()
+
+#S1q2b
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt 
+import seaborn as sns
+
+data = pd.read_csv("/home/adika/Downloads/wineQualityReds.csv")
+data.head()
+
+data.info()
+
+data.describe()
+

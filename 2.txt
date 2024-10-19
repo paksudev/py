@@ -1,0 +1,28 @@
+#Q1
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("/home/adika/Downloads/Data.csv")
+df.head()
+
+df['salary'].fillna(df['salary'].mean())
+
+plt.plot(df['degree_t'], df['salary'])
+plt.show() 
+
+
+
+
+#q2
+import pandas as pd
+df = pd.read_csv('HeightWeight.csv')
+df.head(10)
+
+df.tail(10)
+
+df.sample(20)
+
+df.shape
+
+

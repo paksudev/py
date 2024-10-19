@@ -1,0 +1,20 @@
+#s24q1
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('iris.csv')
+species_count = df['species'].value_counts()
+
+species_count.plot(kind='bar', color=['blue', 'green', 'orange'])
+plt.title('Frequency of Iris Species')
+plt.xlabel('Species')
+plt.ylabel('Frequency')
+plt.show()
+
+#s24q2
+import seaborn as sns
+
+sns.histplot(data=df, x='sepal_length', hue='species', kde=True)
+plt.title('Histogram of Sepal Length by Species')
+plt.xlabel('Sepal Length')
+plt.show()

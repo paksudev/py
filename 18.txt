@@ -1,0 +1,33 @@
+#s18q1
+import pandas as pd
+from sklearn import datasets
+import seaborn as sns
+
+df = pd.read_csv('Iris.csv')
+df
+
+sns.boxplot(x="Species", y="PetalLengthCm", data=df )
+plot.show()
+
+sns.boxplot(x="Species", y="SepalWidthCm", data=df )
+plot.show()
+
+sns.boxplot(x="Species", y="PetalLengthCm", data=df )
+plot.show()
+
+sns.boxplot(x="Species", y="PetalWidthCm", data=df )
+plot.show()
+
+#s18q2
+
+import pandas as pd
+df = pd.read_csv('HeightWeight.csv')
+df.head(10)
+
+df.tail(10)
+
+df.sample(20)
+
+df.shape
+
+

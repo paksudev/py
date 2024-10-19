@@ -1,0 +1,51 @@
+#q1
+import numpy as np 
+import pandas as pd 
+import seaborn as sns
+import matplotlib.pyplot as plt 
+
+
+df= pd.read_csv('wineQuality.csv')
+df.head()
+
+
+mu, sd = 0, 1  # mean and standard deviation
+s = np.random.normal(mu, sd, 100000)
+print("mean: ", np.mean(s))
+print("standart deviation: ", np.std(s))
+# visualize with histogram
+plt.figure(figsize = (10,7))
+plt.hist(s, 100)
+plt.ylabel("quality")
+plt.xlabel("alcohole")
+plt.title("Histogram of Wine Quality")
+plt.show()
+
+#q2
+
+
+from matplotlib import pyplot as plt
+import numpy as np
+
+cars = ['FDS', 'BLCOKCHAIN', 'TCS',        'SYSPRO', 'JAVA', 'INTERNET PROGRAMMING']
+ 
+data = [23, 17, 35, 29, 12, 33]
+ 
+
+fig = plt.figure(figsize =(10, 7))
+plt.pie(data, labels = cars)
+ 
+plt.show()
+
+
+
+#q3
+import pandas as pd
+data = pd.read_csv("wineQualityReds.csv")
+print("Shape of the data:")
+print(data.shape)
+print("\nData Type:")
+print(type(data))
+print("\nFirst 3 rows:")
+print(data.head(3))
+

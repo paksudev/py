@@ -1,0 +1,28 @@
+#s23q1
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+
+data = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])
+scaler = MinMaxScaler()
+normalized_data = scaler.fit_transform(data)
+
+print("Normalized Data:")
+print(normalized_data)
+#s23q2
+from sklearn.preprocessing import StandardScaler
+
+standardizer = StandardScaler()
+standardized_data = standardizer.fit_transform(data)
+
+print("Standardized Data:")
+print(standardized_data)
+
+#s23q3
+from sklearn.preprocessing import Binarizer
+
+threshold = 2.5
+binarizer = Binarizer(threshold=threshold)
+binarized_data = binarizer.fit_transform(data)
+
+print("Binarized Data:")
+print(binarized_data)
