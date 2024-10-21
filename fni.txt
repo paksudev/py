@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <sys/stat.h>
+
+void list(char *mode, char *dirname) {
+    DIR *dir;
+    struct dirent *entry;
+    struct stat filestat;
+    int count = 0;
+
+    dir = opendir(dirname);
+    if (!dir) {
+        printf("Directory not found...\n");
+        return;
+    }
+
+    if (!strcmp(mode, "f")) {
+        printf("filenames in directory: %s\n", dirname);
+        while (!readdir(dir))
+            printf("%s\n", entry->d_name);
+    } 
+    else if (!strcmp(mode, "n")) {
+        while (!readdir(dir))
+            count++;
+        printf("Number of entries: %d\n", count);
+    } 
+    else if (!strcmp(mode, "i")) {
+        printf("filenames and inode numbers in directory: %s\n", dirname);
+        while (!(entry = readdir(dir))) {
+            stat(entry->d_name, &filestat);
+            printf("%s - inode: %lu\n", entry->d_name, filestat.st_ino);
+        }
+    }
+
+    closedir(dir);
+}
+
+int main() {
+    char command[80], op[80], mode[80], filename[80];
+
+    while (1) {
+        printf("myshell$ ");
+        fgets(command, 80, stdin);
+        sscanf(command, "%s %s %s", op, mode, filename);
+
+        if (!strcmp(op, "pause"))
+            break;
+        else if (!strcmp(op, "list"))
+            list(mode, filename);
+        else
+            system(command);
+        }
+}
