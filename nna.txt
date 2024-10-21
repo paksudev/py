@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include<unistd.h>
+
+void typeline(char *mode, char *filename) {
+  char ch;
+  int count = 0, n = atoi(mode);
+  FILE *fp = fopen(filename, "r");
+  if (!fp) {
+    printf("File not found\n");
+    return;
+  }
+
+  if (!strcmp(mode, "a"))
+    while ((ch = fgetc(fp)) != EOF)
+      printf("%c", ch);
+  else if (n > 0)
+    for (int i = 0; i < n && (ch = fgetc(fp)) != EOF; ch == '\n' ? i++ : i)
+      printf("%c", ch);
+  else {
+    while ((ch = fgetc(fp)) != EOF)
+      if (ch == '\n')
+        count++;
+    rewind(fp);
+    for (int i = 0; i < count + n && (ch = fgetc(fp)) != EOF;
+         ch == '\n' ? i++ : i);
+    while ((ch = fgetc(fp)) != EOF)
+      printf("%c", ch);
+  }
+
+  // fclose(fp);
+}
+
+int main() {
+  char command[80], op[20], mode[20], filename[20];
+  while (1) {
+    printf("Shell$");
+    fgets(command, 80, stdin);
+    sscanf(command, "%s %s %s", op, mode, filename);
+
+    if (!strcmp(op, "pause"))
+      break;
+    if (!strcmp(op, "typeline"))
+      typeline(mode, filename);
+    else
+      system(command);
+  }
+}

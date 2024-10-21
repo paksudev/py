@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+void count(char *mode, char *filename){
+    int characters = 0, words = 0, lines = 0;
+    char ch;
+    FILE *fp = fopen(filename, "r");
+    if(fp == NULL){
+        printf("Something went wrong!");
+        return;
+    }
+        
+
+    while((ch = fgetc(fp)) != EOF){
+        characters++;
+        if(ch == ' ')
+            words++;
+        if(ch == '\n'){
+            words++;
+            lines++;
+        }
+    }
+
+    if(!strcmp(mode, "c"))
+        printf("Characters: %d\n", characters);
+    if(!strcmp(mode, "w"))
+        printf("Words: %d\n", words);
+    if(!strcmp(mode, "l"))
+        printf("Lines: %d\n", lines);
+}
+
+
+int main(){
+    char command[80], op[20], mode[20], filename[20];
+    while(1){
+        printf("Shell$");
+        fgets(command, 80, stdin);
+        sscanf(command, "%s %s %s", op, mode, filename);
+
+        if(!strcmp(op, "pause"))
+            break;
+
+        if(!strcmp(op, "count"))
+            count(mode, filename);
+        else{
+            system(command);
+        }
+    }
+}

@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <string.h>
+
+int fact(int n){
+    if(n<=1) return 1;
+    return n * fact(n-1);
+}
+
+
+int main() {
+    char command[80], op[80], arg[80];
+
+    while (1) {
+        printf("myshell$ ");
+        fgets(command, 80, stdin);
+        sscanf(command, "%s %s", op, arg);
+
+        if (!strcmp(op, "fact"))
+            printf("factorial of number is %d.\n", fact(atoi(arg)));
+
+        else if (!strcmp(op, "pause"))
+            break;
+
+        else
+            system(command);
+    }
+
+    return 0;
+}
