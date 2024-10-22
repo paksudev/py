@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct process {
+    int id, at, bt, rt, wt, tt;
+};
+
+int main() {
+    int n, tq, time = 0, completed = 0;
+    float avg_wt = 0, avg_tt = 0;
+    
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+    
+    struct process p[n];
+    
+    printf("Enter time quantum: ");
+    scanf("%d", &tq);
+    
+    for (int i = 0; i < n; i++) {
+        printf("Enter arrival time and burst time for process %d: ", i + 1);
+        p[i].id = i + 1; 
+        scanf("%d %d", &p[i].at, &p[i].bt);
+        p[i].rt = p[i].bt;
+        p[i].wt = p[i].tt = 0;
+    }
+
+    printf("\nGantt Chart:\n");
+    
+    while (completed < n) {
+        int found = 0;
+        for (int i = 0; i < n; i++) {
+            if (p[i].rt > 0 && p[i].at <= time) {
+                found = 1;
+                int exec = (p[i].rt > tq) ? tq : p[i].rt;
+                printf("| Time %d -> P%d ", time, p[i].id);
+                time += exec;
+                p[i].rt -= exec;
+                printf("-> Time %d ", time);
+
+                if (p[i].rt == 0) {
+                    completed++;
+                    p[i].tt = time - p[i].at;
+                    p[i].wt = p[i].tt - p[i].bt;
+                    avg_wt += p[i].wt;
+                    avg_tt += p[i].tt;
+                }
+            }
+        }
+        if (!found) time++;
+    }
+    
+    printf("\n\nID\tWT\tTT\n");
+    for (int i = 0; i < n; i++)
+        printf("P%d\t%d\t%d\n", p[i].id, p[i].wt, p[i].tt);
+
+    printf("\nAverage Waiting Time: %.2f\n", avg_wt / n);
+    printf("Average Turnaround Time: %.2f\n", avg_tt / n);
+    
+    return 0;
+}
